@@ -2,9 +2,8 @@
 # A Bash script that displays:
 # The content of the current directory
 # In a list format
-LIST="$(ls)"
 
-for file in $LIST
+for file in *
 do
-	echo "$file"
+	echo "$file" | cut -f 2- -d '-'
 done
