@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# list all process in user format by showing command hierarchycontaining the bash
+# shellcheck disable=SC2009
+ps -He u | grep bash
