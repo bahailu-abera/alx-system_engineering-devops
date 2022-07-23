@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# list all process in user format by showing command hierarchy
+ps -He u
