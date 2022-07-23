@@ -4,5 +4,5 @@ count=0
 while [ $count -le 1 ]
 do
 	echo "To infinity and beyond"
-	sleep 1
+	sleep 2
 done
