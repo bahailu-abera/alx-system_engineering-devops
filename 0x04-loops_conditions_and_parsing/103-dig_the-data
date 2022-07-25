@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 #Script that parses Apache logs
-cat apache-access.log | awk  '{ print $1 " " $9 }' | sort -n | uniq -c | sort -nr
+awk  '{ print $1 " " $9 }' "apache-access.log" | sort -n | uniq -c | sort -nr
