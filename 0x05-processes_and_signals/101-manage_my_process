@@ -1,12 +1,11 @@
 #!/usr/bin/env bash
-# A script that manages a manage_my_process bash script.
-./lib/lsb/init-functions
+#Bash script that creates a subprocess
 
 PIDFILE=/var/run/my_process.pid
 
 start() {
     ./manage_my_process &
-    sudo echo "$!" > "$PIDFILE"
+    echo "$!" > "$PIDFILE"
 }
 
 stop() {
@@ -15,20 +14,20 @@ stop() {
 
 case "$1" in
     start)
-	start
-	echo "manage_my_process started"
-	;;
+       start
+       echo "manage_my_process started"
+       ;;
     stop)
-	stop
-	echo "manage_my_process stopped"
-	;;
+       stop
+       echo "manage_my_process stopped"
+       ;;
     restart)
-	stop
-	start
-	echo "manage_my_process restarted"
-	;;
+       stop
+       start
+       echo "manage_my_process restarted"
+       ;;
     *)
-	echo "Usage: manage_my_process {start|stop|restart}"
+       echo "Usage: manage_my_process {start|stop|restart}"
 esac
 
 exit 0
