@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # A script that manages a manage_my_process bash script.
-./lib/lsb/init-functions
+. /lib/lsb/init-functions
 
 PIDFILE=/var/run/my_process.pid
 
