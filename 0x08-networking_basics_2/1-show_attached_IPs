@@ -1,15 +1,3 @@
-#! /bin/bash
-
-# saving all the ip addresses
-ip_addresses="$(hostname -I)"
-
-# splitting them by space
-ip_addresses=("${ip_addresses//" "/ }")
-
-# Print each ip address line by line
-for ip in "${ip_addresses[@]}";
-do
-  echo  "$ip"
-done
-
-hostname -i
+#!/usr/bin/env bash
+# Script that displays all active IPv4 IPs on the machine
+ifconfig | grep "inet addr:" | cut -d ':' -f 2- | cut -d ' ' -f 1
