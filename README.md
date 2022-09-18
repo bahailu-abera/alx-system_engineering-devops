@@ -2,8 +2,8 @@
 ### Module of System engineering and Devops.
 
 ### Technologies
-      Scripts written in Bash 5.9.17(1)<br>
-      Tested on Ubuntu 20.04 LTS<br>
+      Scripts written in Bash 5.9.17(1)
+      Tested on Ubuntu 20.04 LTS
 ### files 
 |Project name	 |Description
 |------------- | -------------------- |
@@ -16,3 +16,6 @@
 |0x06-regular_expressions	 |It aims to learn about how to build a regular expression
 |0x07-networking_basics	 |It aims to learn about what is an OSI model, LAN, WAN, IP address, localhost, subnet and TCP/UDP
 |0x08-networking_basics_2 |	It aims to learn about what is localhost/127.0.0.1, what is 0.0.0.0, what is /etc/hosts and how to display the machine's active network interfaces
+|0x09-web_infrastructure_design | It aims to learn about how to design a web infrastructure|
+|0x0A-configuration_management | It aims to learn about configuration management tools like puppet|
+
