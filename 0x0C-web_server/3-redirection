@@ -3,5 +3,6 @@
 apt-get -y update
 apt-get -y install nginx
 echo "Hello World!" > /var/www/html/index.nginx-debian.html
-sed -i "s/server_name _;/server_name _;\n\trewrite ^\/redirect_me https:\/\/github.com\/bahailu-abera permanent;/" /etc/nginx/sites-available/default 
-service nginx start
+new_string="server_name _;\n\n\tlocation \/redirect_me {\n\t\t rewrite ^\/redirect_me https:\/\/github.com\/bahailu-abera permanent;\n\t}"
+sed -i "s/server_name _;/${new_string}/" /etc/nginx/sites-available/default
+service nginx restart
