@@ -3,9 +3,12 @@
 apt-get install --no-install-recommends software-properties-common
 add-apt-repository ppa:vbernat/haproxy-2.6
 apt-get install haproxy=2.6.\*
+sed -i "s/global/global\n\th1-case-adjust x-served-by X-Served-By/" /etc/haproxy/haproxy.cfg
+
 string="fronted haproxy-main
 		bind *:80
 		option forwardfor
+		option h1-case-adjust-bogus-client
 		default_backend nginx_webservers
 
 	backend nginx_webservers
