@@ -13,7 +13,8 @@ string="fronted haproxy-main
 
 	backend nginx_webservers
 		balance roundrobin
-		server web-01 44.211.36.124:80 check
-		server web-02 3.236.150.149:80 check
+		server 3741-web-01 44.211.36.124:80 check
+		server 3741-web-02 3.236.150.149:80 check
 "
 echo "$string" |sudo tee -a /etc/haproxy/haproxy.cfg
+service haproxy restart
