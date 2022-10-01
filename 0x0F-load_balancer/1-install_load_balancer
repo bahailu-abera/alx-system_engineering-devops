@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+# a script to install and configure haproxy
+apt-get install --no-install-recommends software-properties-common
+add-apt-repository ppa:vbernat/haproxy-2.6
+apt-get install haproxy=2.6.\*
+string="fronted haproxy-main
+		bind *:80
+		option forwardfor
+		default_backend nginx_webservers
+
+	backend nginx_webservers
+		balance roundrobin
+		server web-01 44.211.36.124:80 check
+		server web-02 3.236.150.149:80 check
+"
+echo "$string" |sudo tee -a /etc/haproxy/haproxy.cfg
