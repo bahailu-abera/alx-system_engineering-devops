@@ -1,26 +1,21 @@
-# Install Nginx web server on a brand new ubuntu machine
+#This pupppet scripts assure an nginx installation
 
-exec {'update':
-  provider => shell,
-  command  => 'sudo apt-get -y update',
-  before   => Exec['install nginx'],
+exec { '/usr/bin/env apt-get -y update':}
+->package {'nginx':
+ensure => installed,
 }
 
-exec {'install nginx':
-  provider => shell,
-  command  => 'sudo apt-get -y install nginx',
-  before   => Exec['add_header']
-  require  => Exec['update']
+->file {'/var/www/html/index.html':
+content => 'Hello World!\n',
 }
 
-exec {'add_header':
-  provider    => shell,
-  environment => ["HOST=${hostname}"],
-  command     => 'sudo sed -i "s/include \/etc\/nginx\/sites-enabled\/\*;/include \/etc/nginx\/sites-enabled\/\*;\nadd_header X-Served-By \"$HOST\";/" /etc/nginx/nginx.conf',
-  before      => Exec['restart nginx'],
+->file_line {'add protocol':
+ensure => present,
+path   => '/etc/nginx/sites-available/default',
+after  => 'listen 80 default_server;',
+line   => "\tadd_header X-Served-By ${hostname};",
 }
 
-exec {'restart nginx':
-  provider => shell,
-  command  => 'sudo servive nginx restart',
+->service { 'nginx':
+ensure     => running,
 }
