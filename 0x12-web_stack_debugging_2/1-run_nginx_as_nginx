@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# script to run nginx server as nginx user
+service nginx stop
+chmod 755 /etc/nginx/nginx.conf
+su nginx
+service nginx start
