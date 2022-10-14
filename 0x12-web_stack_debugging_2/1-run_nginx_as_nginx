@@ -2,5 +2,4 @@
 # script to run nginx server as nginx user
 service nginx stop
 chmod 755 /etc/nginx/nginx.conf
-su nginx
-service nginx start
+su - nginx -c "service nginx start"
