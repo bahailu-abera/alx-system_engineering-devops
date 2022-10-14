@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# script to print the user
+sudo su "$1"
+whoami
