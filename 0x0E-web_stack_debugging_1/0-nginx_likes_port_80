@@ -3,7 +3,7 @@
 pkill -9 apache2
 pkill -9 nginx
 sed -i "s/listen 8080/listen 80/" /etc/nginx/sites-enabled/default
-sed -i "s/listen [::]:8080/listen [::]:80/" /etc/nginx/sites-enabled/default
-sed -i "s/server_name localhost/server_name _;/" /etc/nginx/sites-enabled/default
-sed -i "s/server_name localhost/server_name _;/" /etc/nginx/sites-available/default
+sed -i "s/listen [::]:8080 default_server ipv6only=on;/listen [::]:80;/" /etc/nginx/sites-enabled/default
+sed -i "s/server_name localhost/server_name _/" /etc/nginx/sites-enabled/default
+sed -i "s/server_name localhost/server_name _/" /etc/nginx/sites-available/default
 service nginx start
