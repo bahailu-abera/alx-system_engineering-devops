@@ -27,7 +27,7 @@ def export_to_json(todo_dict):
     file_name = "todo_all_employees.json"
     json_string = json.dumps(todo_dict)
 
-    with open(file_name, 'a') as fs:
+    with open(file_name, 'w') as fs:
         fs.write(json_string)
 
 
