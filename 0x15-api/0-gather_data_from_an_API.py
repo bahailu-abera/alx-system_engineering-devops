@@ -13,10 +13,10 @@ def print_completed(name, todos):
 
     for todo in todos:
         if todo.get('completed'):
-            comp_title = comp_title + "\n\t" + todo.get('title')
+            comp_title = comp_title + "\n\t " + todo.get('title')
             comp_total += 1
     print("Employee {} is done with tasks({:d}/{:d}):".
-           format(name, comp_total, len(todos)), end="")
+          format(name, comp_total, len(todos)), end="")
     print("{}".format(comp_title))
 
 
