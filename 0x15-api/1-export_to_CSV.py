@@ -30,15 +30,15 @@ def fetch_todos(id, url='https://jsonplaceholder.typicode.com/users'):
 
     user = requests.get(user_url)
     todos = requests.get(todos_url)
-    name = ""
+    username = ""
     todos_dict = None
 
     if user.status_code == 200:
-        name = user.json().get('name')
+        username = user.json().get('username')
     if todos.status_code == 200:
         todos_dict = todos.json()
-    if name and todos_dict:
-        export_to_csv(name, todos_dict)
+    if username and todos_dict:
+        export_to_csv(username, todos_dict)
 
 
 if __name__ == "__main__":
