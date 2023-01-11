@@ -1,38 +1,36 @@
 #!/usr/bin/python3
 """
-Module pagination
+Request the top ten hot posts
 """
 import requests
 
 
-def count_words(subreddit, word_list, after=None, words={}):
+def count_words(subreddit, word_list, after=None, my_dict={}):
     """
-    A recursive function that queries the Reddit API and returns a list
-    containing the titles of all hot articles for a given subreddit.
+    Gets the top ten hot post of a subreddit
     """
-    url = "https://www.reddit.com/r/{}/hot.json".format(subreddit)
-
-    try:
-        payload = {'after': after}
-        res = requests.get(url, allow_redirects=False,
-                           params=payload,
-                           headers={'User-Agent': 'Pagination-Example'})
-        res = res.json()
-        posts = res.get('data').get('children')
-        after = res.get('data').get('after')
-        for post in posts:
-            title = post.get('data').get('title')
+    url = 'https://www.reddit.com/r/{}/hot.json'.format(subreddit)
+    payload = {'after': after}
+    response = requests.get(url,
+                            allow_redirects=False,
+                            params=payload,
+                            headers={'User-Agent': 'Pear'})
+    if response and response.status_code == 200:
+        post_list = response.json().get('data').get('children')
+        for children in post_list:
+            title1 = children.get('data').get('title')
             for word in word_list:
                 try:
-                    words[word] += title.lower().split().count(word.lower())
+                    my_dict[word] += title1.lower().split().count(word.lower())
                 except KeyError:
-                    words[word] = title.lower().split().count(word.lower())
-        if after is None:
-            lst = sorted(words.items(), key=lambda t: (-a[1], a[0]))
-            for key, value in lst:
-                if value:
-                    print("{:s}: {:s}".format(key, value))
+                    my_dict[word] = title1.lower().split().count(word.lower())
+        after = response.json().get('data').get('after')
+        if (after is None):
+            for key, val in sorted(my_dict.items(),
+                                   key=lambda x: (-1*x[1], -1*x[0])):
+                if (val != 0):
+                    print("{}: {}".format(key.lower(), val))
             return
-        return count_words(subreddit, word_list, after, words)
-    except Exception:
-        return None
+        return count_words(subreddit, word_list, after, my_dict)
+    else:
+        return
