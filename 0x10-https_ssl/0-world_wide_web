@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+# This script displays information about subdomains of a domain
+
+get_record_type() {
+  local domain="$1"
+  local subdomain="$2"
+
+  dig_output=$(dig "$subdomain.$domain" +short)
+  record_type=$(dig "$subdomain.$domain" | awk '/ANSWER SECTION:/ { getline; print $4 }')
+
+  if [[ -n $dig_output ]]; then
+    echo "$dig_output" | awk '{ print "The subdomain '"$subdomain"' is a '"$record_type"' record and points to " $0 }'
+  else
+    echo "The subdomain $subdomain does not have any records."
+  fi
+}
+
+domain="$1"
+subdomain="$2"
+
+if [[ -z $subdomain ]]; then
+  subdomains=("www" "lb-01" "web-01" "web-02")
+else
+  subdomains=("$subdomain")
+fi
+
+for sub in "${subdomains[@]}"; do
+  get_record_type "$domain" "$sub"
+done
