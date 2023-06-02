@@ -1,0 +1,30 @@
+server {
+	listen 80;
+    server_name 54.157.167.29;
+
+    location /airbnb-onepage/ {
+        proxy_pass http://localhost:5000;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+    }
+
+	root /var/www/html;
+
+	# Add index.php to the list if you are using PHP
+	index index.html index.htm index.nginx-debian.html;
+
+	server_name _;
+
+	location / {
+		location /hbnb_static {
+			alias /data/web_static/current/;
+		}
+
+		location /hbnb_static/ {
+			alias /data/web_static/current/;
+		}
+
+		try_files $uri $uri/ =404;
+	}
+
+}
