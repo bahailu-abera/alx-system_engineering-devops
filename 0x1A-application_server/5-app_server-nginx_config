@@ -1,0 +1,41 @@
+server {
+listen 80;
+server_name 54.157.167.29;
+
+location /airbnb-dynamic/number_odd_or_even/ {
+        proxy_pass http://127.0.0.1:5001;
+        proxy_set_header Host ;
+        proxy_set_header X-Real-IP ;
+        rewrite ^/airbnb-dynamic/number_odd_or_even/(\d+)$ /number_odd_or_even/ break;
+    }
+
+location / {
+        proxy_pass http://localhost:5003;
+        proxy_set_header Host ;
+        proxy_set_header X-Real-IP ;
+    }
+location /static/ {
+        alias /home/ubuntu/AirBnB_clone_v4/web_dynamic/static/;
+    }
+    
+location /number_odd_or_even/ {
+        proxy_pass http://127.0.0.1:5001;
+        proxy_set_header Host ;
+        proxy_set_header X-Real-IP ;
+}
+
+location /api/ {
+proxy_pass http://127.0.0.1:5002;
+proxy_set_header Host ;
+proxy_set_header X-Real-IP ;
+}
+
+root /var/www/html;
+
+# Add index.php to the list if you are using PHP
+index index.html index.htm index.nginx-debian.html;
+
+server_name _;
+
+}
+
